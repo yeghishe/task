@@ -9,7 +9,7 @@ import scala.concurrent.duration._
  * Created by yeghishe on 5/4/15.
  */
 object DemoSenderActor {
-  def props(taskActor: ActorRef) = Props(new DemoSenderActor(taskActor))
+  def props(taskActor: ActorRef): Props = Props(new DemoSenderActor(taskActor))
 
 }
 class DemoSenderActor(taskActor: ActorRef) extends Actor with ActorLogging {

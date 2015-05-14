@@ -10,9 +10,13 @@ package object task {
 
   object TaskType {
     val demo = TaskType("demo")
+    val inboundSms = TaskType("inbound-sms")
+    val outboundSms = TaskType("outbound-sms")
 
     private val all = Map(
-      demo.name -> demo
+      demo.name -> demo,
+      inboundSms.name -> inboundSms,
+      outboundSms.name -> outboundSms
     )
     def fromName(name: String): Option[TaskType] = all.get(name)
   }

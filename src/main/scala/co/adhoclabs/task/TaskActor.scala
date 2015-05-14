@@ -31,7 +31,7 @@ class TaskActor extends Actor with ActorLogging with Config {
   override def receive: Receive = {
     case task @ Task(taskType, payload) ⇒
       log.debug(s"Publishing task: $task")
-      producersRefs.get(taskType).foreach(_ ! Serializer.serialize(payload))
+      producersRefs.get(taskType).foreach(_ forward Serializer.serialize(payload))
     case msg ⇒ log.warning(s"Got unexpected message: $msg")
   }
 }

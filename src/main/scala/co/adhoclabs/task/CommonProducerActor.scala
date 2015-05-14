@@ -10,6 +10,6 @@ object CommonProducerActor {
   def props(taskType: TaskType): Props = Props(new CommonProducerActor(taskType))
 }
 
-class CommonProducerActor(taskType: TaskType) extends Producer with Oneway {
+class CommonProducerActor(taskType: TaskType) extends Producer {
   override def endpointUri: String = getCommonEndpointUrlFromTaskType(taskType)
 }

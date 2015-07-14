@@ -1,26 +1,28 @@
-package co.adhoclabs.task
+package co.adhoclabs.task.consumer
 
-import akka.actor.{ ActorLogging, Props, Status }
+import akka.actor.{ ActorPath, ActorLogging, Props, Status }
 import akka.camel.{ Ack, CamelMessage, Consumer }
 import akka.util.Timeout
-
-import scala.util.Success
+import co.adhoclabs.task._
 
 /**
  * Created by yeghishe on 5/4/15.
  */
 object CommonConsumerActor {
-  def props(taskType: TaskType, targetActorPath: String): Props =
+  def props(taskType: TaskType, targetActorPath: ActorPath): Props =
     Props(new CommonConsumerActor(taskType, targetActorPath))
 }
 
-class CommonConsumerActor(taskType: TaskType, targetActorPath: String) extends Consumer with ActorLogging with Config {
+class CommonConsumerActor(override val taskType: TaskType, targetActorPath: ActorPath) extends BaseConsumer {
   private case class Reply(msg: Any)
 
   private val targetActor = context.actorSelection(targetActorPath)
   implicit private val askTimeout: Timeout = targetActorTimeout
 
-  override def endpointUri: String = getCommonEndpointUrlFromTaskType(taskType)
+  override def preStart(): Unit = {
+    log.debug(s"Starting consumer for $taskType")
+    super.preStart()
+  }
 
   override def receive: Receive = {
     case CamelMessage(body: Array[Byte], _) ⇒

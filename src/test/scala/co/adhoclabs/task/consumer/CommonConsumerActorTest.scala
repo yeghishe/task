@@ -1,8 +1,9 @@
-package co.adhoclabs.task
+package co.adhoclabs.task.consumer
 
 import akka.actor.{ ActorSystem, Status }
 import akka.camel.{ Ack, CamelMessage }
 import akka.testkit._
+import co.adhoclabs.task._
 import org.scalatest.{ BeforeAndAfterAll, Matchers, WordSpecLike }
 
 /**
@@ -50,7 +51,8 @@ class CommonConsumerActorTest extends TestKit(ActorSystem("test-system"))
   private def withConsumerActor(testCode: (TestActorRef[CommonConsumerActor], TestProbe) => Any): Unit = {
     val targetProbe = TestProbe()
     val consumerActor = TestActorRef.create[CommonConsumerActor](
-      system, CommonConsumerActor.props(taskType, targetProbe.ref.path.toString))
+      system, CommonConsumerActor.props(taskType, targetProbe.ref.path)
+    )
 
     try {
       testCode(consumerActor, targetProbe)

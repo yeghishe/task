@@ -1,7 +1,8 @@
-package co.adhoclabs.task
+package co.adhoclabs.task.producer
 
 import akka.actor.ActorSystem
-import akka.testkit.{ TestActorRef, ImplicitSender, TestKit }
+import akka.testkit.{ ImplicitSender, TestActorRef, TestKit }
+import co.adhoclabs.task._
 import org.scalatest.{ BeforeAndAfterAll, Matchers, WordSpecLike }
 
 /**

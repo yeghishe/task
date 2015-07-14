@@ -13,12 +13,14 @@ package object task {
     val inboundSms = TaskType("inbound-sms")
     val outboundSms = TaskType("outbound-sms")
     val slackMessage = TaskType("slack-message")
+    val segment = TaskType("segment")
 
     private val all = Map(
       demo.name -> demo,
       inboundSms.name -> inboundSms,
       outboundSms.name -> outboundSms,
-      slackMessage.name -> slackMessage
+      slackMessage.name -> slackMessage,
+      segment.name -> segment
     )
     def fromName(name: String): Option[TaskType] = all.get(name)
   }

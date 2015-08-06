@@ -1,18 +1,16 @@
 package co.adhoclabs.task.demo
 
 import akka.actor.{ Actor, ActorLogging, Props }
+import co.adhoclabs.task.message.OK
 
 /**
  * Created by yeghishe on 5/4/15.
  */
 object DemoReceiverActor {
   def props: Props = Props(new DemoReceiverActor)
-  case object OK
 }
 
 class DemoReceiverActor extends Actor with ActorLogging {
-  import DemoReceiverActor._
-
   override def receive: Receive = {
     case DemoPayload(i) if i == 2 ⇒
     case msg @ DemoPayload(i) if i == 4 ⇒

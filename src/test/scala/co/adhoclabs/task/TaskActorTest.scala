@@ -37,9 +37,11 @@ class TaskActorTest extends TestKit(ActorSystem("test-system"))
     val consumerProbe = TestProbe()
 
     class TaskActorForTest extends TaskActor {
-      override protected def createCommonProducerActor(taskType: TaskType): ActorRef = producerProbe.ref
-      override protected def createCommonConsumerActor(taskType: TaskType,
-        targetActorPath: String): ActorRef = consumerProbe.ref
+      override protected def createProducerActor(taskType: TaskType): ActorRef = producerProbe.ref
+      override protected def createProxyConsumerActor(
+        taskType: TaskType,
+        targetActorPath: String
+      ): ActorRef = consumerProbe.ref
     }
     val taskActor = system.actorOf(Props(new TaskActorForTest))
 

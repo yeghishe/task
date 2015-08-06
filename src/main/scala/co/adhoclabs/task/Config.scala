@@ -1,5 +1,7 @@
 package co.adhoclabs.task
 
+import co.adhoclabs.task.worker.SegmentActor
+import co.adhoclabs.task.client.SegmentClient
 import com.typesafe.config.ConfigFactory
 import scala.collection.JavaConverters._
 import scala.concurrent.duration._
@@ -12,13 +14,25 @@ private[task] trait Config {
   private lazy val taskConfig = ConfigFactory.load().getConfig("task")
   lazy val commonEndpointUrl = taskConfig.getString("common-endpoint-url")
   lazy val targetActorTimeout = Duration(taskConfig.getDuration("target-actor-timeout", SECONDS), SECONDS)
-  lazy val producers = taskConfig.getStringList("common-producers").asScala.toList.map(TaskType.fromName(_)
-    .getOrElse(throw configError))
-  lazy val consumerActorPaths = taskConfig.getObject("common-consumers").unwrapped().asScala.map {
+  lazy val producers = taskTypesFromKey("producers")
+  lazy val consumers = taskTypesFromKey("consumers")
+  lazy val consumerProxyActors = taskConfig.getObject("consumer-proxy-actors").unwrapped().asScala.map {
     case (k: String, v: java.util.HashMap[_, _]) ⇒
       TaskType.fromName(k).map(_ -> v.get("target-actor").toString).getOrElse(throw configError)
     case _ ⇒ throw configError
   }.toMap
+
+  private val segmentConfig = taskConfig.getConfig("segment")
+  val segmentWriteKey = segmentConfig.getString("write-key")
+  val segmentBaseUrl = segmentConfig.getString("base-url")
+  val segmentRequestTimeout = segmentConfig.getDuration("request-timeout", MILLISECONDS)
+
+  private def taskTypesFromKey(key: String): List[TaskType] =
+    taskConfig.getStringList(key).asScala.toList.map(TaskType.fromName(_).getOrElse(throw configError))
+
+  val workerActorPropMap = Map(
+    TaskType.segment -> SegmentActor.props(SegmentClient)
+  )
 }
 
 private[task] object Config extends Config

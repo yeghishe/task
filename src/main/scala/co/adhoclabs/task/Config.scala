@@ -1,7 +1,7 @@
 package co.adhoclabs.task
 
-import co.adhoclabs.task.worker.SegmentActor
-import co.adhoclabs.task.client.SegmentClient
+import co.adhoclabs.task.worker.{ PushActor, SegmentActor }
+import co.adhoclabs.task.client.{ UAClient, GcmClient, SegmentClient }
 import com.typesafe.config.ConfigFactory
 import scala.collection.JavaConverters._
 import scala.concurrent.duration._
@@ -27,11 +27,21 @@ private[task] trait Config {
   val segmentBaseUrl = segmentConfig.getString("base-url")
   val segmentRequestTimeout = segmentConfig.getDuration("request-timeout", MILLISECONDS)
 
+  private val pushConfig = taskConfig.getConfig("push")
+  val apnsCertificatePath = pushConfig.getString("certificate-path")
+  val apnsCertificatePwd = pushConfig.getString("certificate-password")
+  val uaKey = pushConfig.getString("ua-key")
+  val uaSecret = pushConfig.getString("ua-secret")
+  val gcmAuthKey = pushConfig.getString("gcm-auth-key")
+  val gcmBaseUrl = pushConfig.getString("gcm-base-url")
+  val gcmRequestTimeout = pushConfig.getDuration("request-timeout", MILLISECONDS)
+
   private def taskTypesFromKey(key: String): List[TaskType] =
     taskConfig.getStringList(key).asScala.toList.map(TaskType.fromName(_).getOrElse(throw configError))
 
   val workerActorPropMap = Map(
-    TaskType.segment -> SegmentActor.props(SegmentClient)
+    TaskType.segment -> SegmentActor.props(SegmentClient),
+    TaskType.push -> PushActor.props(UAClient, GcmClient, Option(apnsCertificatePath), Option(apnsCertificatePwd))
   )
 }
 

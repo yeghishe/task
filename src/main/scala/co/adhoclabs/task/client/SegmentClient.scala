@@ -17,7 +17,6 @@ import scalaz.syntax.monad._
  * Created by yeghishe on 7/13/15.
  */
 trait SegmentClient extends Config {
-  import SegmentClient._
   import rapture._
   import core._
   import io._
@@ -64,6 +63,4 @@ trait SegmentClient extends Config {
   }
 }
 
-object SegmentClient extends SegmentClient {
-  type ClientResponse[R] = EitherT[Future, (Int, String), R]
-}
+object SegmentClient extends SegmentClient

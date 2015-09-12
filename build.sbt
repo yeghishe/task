@@ -1,6 +1,6 @@
 organization := "co.adhoclabs"
 name := "task"
-version := "0.1.0"
+version := "0.1.1"
 scalaVersion := "2.11.5"
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
 
@@ -9,6 +9,7 @@ libraryDependencies ++= {
   val scalazVersion    = "7.1.1"
   val scalazScalaTestV = "0.2.3"
   val raptureV         = "1.0.0"
+
   Seq(
     "org.scalaz"                %% "scalaz-core"                 % scalazVersion,
     "org.scalaz"                %% "scalaz-effect"               % scalazVersion,
@@ -23,11 +24,13 @@ libraryDependencies ++= {
     "com.propensive"            %% "rapture-io"                  % "0.10.0",
     "com.propensive"            %% "rapture-net"                 % "0.10.0",
     "org.apache.camel"           % "camel-rabbitmq"              % "2.15.2",
+    "org.apache.camel"           % "camel-apns"                  % "2.15.2",
     "org.scalaz"                %% "scalaz-scalacheck-binding"   % scalazVersion    % "it,test",
     "org.typelevel"             %% "scalaz-scalatest"            % scalazScalaTestV % "it,test",
     "com.typesafe.akka"         %% "akka-testkit"                % akkaVersion      % "it,test",
     "org.scalatest"             %% "scalatest"                   % "2.2.4"          % "it,test",
-    "org.scalamock"             %% "scalamock-scalatest-support" % "3.2"            % "it,test"
+    "org.scalamock"             %% "scalamock-scalatest-support" % "3.2"            % "it,test",
+    "com.urbanairship"           % "java-client"                 % "0.3.3"
   )
 }
 

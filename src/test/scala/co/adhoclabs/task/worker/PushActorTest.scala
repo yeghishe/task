@@ -2,6 +2,7 @@ package co.adhoclabs.task.worker
 
 import akka.actor.{ ActorRef, ActorSystem }
 import akka.testkit.{ ImplicitSender, TestKit }
+import co.adhoclabs.model.notifications.{ PushMessageTypes, PushMessage }
 import co.adhoclabs.task.Config
 import co.adhoclabs.task.client.{ GcmClient, UAClient }
 import co.adhoclabs.task.message._

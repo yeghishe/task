@@ -1,7 +1,7 @@
 package co.adhoclabs.task.client
 
+import co.adhoclabs.model.notifications.PushMessage
 import co.adhoclabs.task.Config
-import co.adhoclabs.task.message.PushMessage
 import rapture.mime.MimeTypes
 
 import scala.concurrent.{ ExecutionContext, Future }

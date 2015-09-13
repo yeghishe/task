@@ -2,8 +2,8 @@ package co.adhoclabs.task.client
 
 import java.io.{ BufferedReader, InputStreamReader }
 
+import co.adhoclabs.model.notifications.PushMessage
 import co.adhoclabs.task.Config
-import co.adhoclabs.task.message.PushMessage
 import com.urbanairship.api.client.APIClient
 import com.urbanairship.api.client.model.{ APIPushResponse, APIClientResponse }
 import com.urbanairship.api.push.model.audience.Selectors

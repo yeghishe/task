@@ -1,6 +1,6 @@
 package co.adhoclabs.task.client
 
-import co.adhoclabs.model.notifications.PushMessage
+import co.adhoclabs.task.message.PushMessage
 import co.adhoclabs.task.Config
 import rapture.mime.MimeTypes
 

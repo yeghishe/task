@@ -3,3 +3,4 @@ target
 project/target
 *.DS_Store
 *.log
+*.swp

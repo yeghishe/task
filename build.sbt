@@ -11,7 +11,6 @@ libraryDependencies ++= {
   val raptureV         = "1.0.0"
 
   Seq(
-    "co.adhoclabs"              %% "model"                       % "1.3.8",
     "org.scalaz"                %% "scalaz-core"                 % scalazVersion,
     "org.scalaz"                %% "scalaz-effect"               % scalazVersion,
     "org.scalaz"                %% "scalaz-typelevel"            % scalazVersion,

@@ -1,7 +1,7 @@
 organization := "co.adhoclabs"
 name := "task"
-version := "0.1.7"
-scalaVersion := "2.11.5"
+version := "0.1.3"
+scalaVersion := "2.11.7"
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
 
 libraryDependencies ++= {

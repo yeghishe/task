@@ -2,7 +2,7 @@ package co.adhoclabs.task.worker
 
 import akka.actor.{ Actor, ActorLogging, Props, Status }
 import akka.camel.CamelExtension
-import co.adhoclabs.model.notifications.{ PushMessageTypes, PushMessage }
+import co.adhoclabs.task.message.{ PushMessageTypes, PushMessage }
 import co.adhoclabs.task.client.{ GcmClient, UAClient }
 import co.adhoclabs.task.message._
 import org.apache.camel.component.apns.ApnsComponent

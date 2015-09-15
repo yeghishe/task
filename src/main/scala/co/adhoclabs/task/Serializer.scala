@@ -10,21 +10,24 @@ private[task] object Serializer {
   def serialize(obj: Any): Array[Byte] = {
     val b = new ByteArrayOutputStream()
     val o = new ObjectOutputStream(b)
-    o.writeObject(obj)
-    val result = b.toByteArray
-
-    o.close()
-    b.close()
-    result
+    try {
+      o.writeObject(obj)
+      o.flush()
+      b.toByteArray
+    } finally {
+      o.close()
+      b.close()
+    }
   }
 
   def deserialize(buf: Array[Byte]): Any = {
     val b = new ByteArrayInputStream(buf)
     val o = new ObjectInputStream(b)
-    val result = o.readObject()
-
-    o.close()
-    b.close()
-    result
+    try {
+      o.readObject()
+    } finally {
+      o.close()
+      b.close()
+    }
   }
 }

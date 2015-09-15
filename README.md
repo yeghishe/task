@@ -1,5 +1,7 @@
 # Task project
 
+[![Join the chat at https://gitter.im/yeghishe/task](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/yeghishe/task?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Task project is designed to run tasks in reliable manner.
 It can run as a stand alone app or be embedded into another akka project both as publisher(s) and/or consumer(s). 
 

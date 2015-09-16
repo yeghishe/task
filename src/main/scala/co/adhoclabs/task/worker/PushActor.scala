@@ -63,9 +63,7 @@ class PushActor(uaClient: UAClient,
       val jsonString = json"""
         {
          "aps": {
-           "alert": {
-             "body": ${msg.message}
-           },
+           "alert": ${msg.message},
            "sound": "default"
           }
         }""" ++ jsonExtras ++ jsonBadge ++ jsonCategory

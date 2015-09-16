@@ -31,23 +31,20 @@ trait GcmClient extends Config {
 
   def send(pushMessage: PushMessage)(implicit ec: ExecutionContext): ClientResponse[Boolean] = {
     val url: HttpUrl = Https / gcmBaseUrl / "gcm" / "send"
-    val optionsReqMap = pushMessage.extraKeys
 
-    val jsonString =
+    val jsonData = json"""{"data":${pushMessage.extraKeys}}"""
+
+    val jsonBody =
       json"""{
       "to": ${pushMessage.token},
       "notification": {
         "title": ${pushMessage.message}
       },
       "data": {
-       "com.urbanairship.push.ALERT": ${pushMessage.message},
-       "type": ${optionsReqMap("type")},
-       "bid": ${optionsReqMap("bid")}
-      }
-    }
-    """
+       "com.urbanairship.push.ALERT": ${pushMessage.message}
+      }}""" ++ jsonData
 
-    EitherT(makePostRequest(url, jsonString) ∘ { r ⇒
+    EitherT(makePostRequest(url, jsonBody) ∘ { r ⇒
       if (r.status ≟ 200) true.right else (r.status, r.slurp[Char]()).left
     })
   }

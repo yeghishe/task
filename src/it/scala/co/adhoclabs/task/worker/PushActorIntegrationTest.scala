@@ -2,6 +2,7 @@ package co.adhoclabs.task.worker
 
 import akka.actor.{ActorRef, ActorSystem}
 import akka.testkit.{ImplicitSender, TestKit}
+import co.adhoclabs.model.notifications.{PushMessageTypes, PushMessage}
 import co.adhoclabs.task.Config
 import co.adhoclabs.task.client.{GcmClient, UAClient}
 import co.adhoclabs.task.message._
@@ -9,7 +10,7 @@ import com.typesafe.config.ConfigFactory
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpecLike}
 
-class PushActorTest extends TestKit(ActorSystem("test-system"))
+class PushActorIntegrationTest extends TestKit(ActorSystem("test-system"))
 with Config
 with ImplicitSender
 with WordSpecLike
@@ -22,18 +23,20 @@ with BeforeAndAfterAll {
     "receives PushMessage message" should {
       "send message to chris iphone" in withActor { actor =>
         val msg = PushMessage(
-          "5abfe50e0cb7849f721c012ac7764b3cdea3125068a2ae95c0f09d8f1c10110b",
+          "8855d9db9798debe3b94df220aff0cad1194a24fdbf13e808dbabe636a906411",
           PushMessageTypes.apns,
           "msg with badge 4",
           Option(4),
-          Map.empty,
+          Map("bid" → "1",
+          "number" → "+13109998888",
+          "type" → "sms"),
           None
         )
 
         actor ! msg
 
         expectMsg(OK)
-          }
+      }
     }
   }
 

@@ -1,6 +1,6 @@
 package co.adhoclabs.task.client
 
-import co.adhoclabs.task.message.{PushMessageTypes, PushMessage}
+import co.adhoclabs.model.notifications.{PushMessageTypes, PushMessage}
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatest.{Matchers, WordSpec}
@@ -15,7 +15,7 @@ class GcmClientTest extends WordSpec with ScalaFutures with Matchers with Disjun
     "send" should {
       "return true right" in {
         val msg = PushMessage(
-          "eV7utTJfnVI:APA91bE5KZftsmawPZ4386t62wD6rZ3QCEiWa86wIJxPrbqp3JlvidjYAI8UeRUhLvjlXz1QK9ef5LiXbKJdcdm2138kTJ435_jeWGzzzY6MoDXzyuX_dYTHX8ayEViDCg9pCU3YTasH",
+          "eORjNkcs3dU:APA91bEuOePQICwGI1nBgh8UJ03t6C2HnnOGcxUpuq6n7kInkljzV8mCDqJ5n07afqd9QqWyiv5bbz7me0sCJG4fDqX9plnLecol5ZjVS_-uqYo8MGITQfTkW48tt1B9acSEMaLGTFjw",
           PushMessageTypes.gcm,
           "snd testing msg from thu sep 10th - gcm",
           None,

@@ -1,6 +1,6 @@
 package co.adhoclabs.task.client
 
-import co.adhoclabs.task.message.{PushMessageTypes, PushMessage}
+import co.adhoclabs.model.notifications.{PushMessageTypes, PushMessage}
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatest.{Matchers, WordSpec}
@@ -19,13 +19,11 @@ class UAClientTest extends WordSpec with ScalaFutures with Matchers with Disjunc
           PushMessageTypes.ua,
           "testing msg from thu sep 10th - ua",
           None,
-          Option(
             Map(
               "type" -> "sms",
               "number" -> "+16669998888",
               "bid" -> "2"
-            )
-          ),
+            ),
           None
         )
 

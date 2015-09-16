@@ -56,20 +56,19 @@ class PushActor(uaClient: UAClient,
       import json._
       import rapture.json.jsonBackends.jackson._
 
-      val badge = msg.badge.map(_.toString).getOrElse("auto")
-      val category = msg.category.getOrElse("")
-      val jsonString =
-        json"""{
-               "aps": {
-               "badge": $badge,
-               "category": $category,
-               "alert": {
-                 "body": ${msg.message}
-               },
-               "sound": "default"
-               }
-      }
-      """
+      val empty = json"""{}"""
+      val jsonBadge = msg.badge.fold(empty)(b ⇒ json"""{"aps":{ "badge":$b }}""")
+      val jsonCategory = msg.category.fold(empty)(b ⇒ json"""{"aps":{ "category":$b }}""")
+      val jsonExtras = json"""${msg.extraKeys}"""
+      val jsonString = json"""
+        {
+         "aps": {
+           "alert": {
+             "body": ${msg.message}
+           },
+           "sound": "default"
+          }
+        }""" ++ jsonExtras ++ jsonBadge ++ jsonCategory
 
       val producerTemplate = camel.template
       producerTemplate.sendBodyAndHeader(

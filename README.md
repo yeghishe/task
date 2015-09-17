@@ -8,6 +8,10 @@ It can run as a stand alone app or be embedded into another akka project both as
 
 Use cases would be queueing, live data migration, sending events to Mixpanel, download files from a server and put on S3, etc.
 
+## Overview or architecture
+[Blog post about task library](http://yeghishe.github.io/2015/09/16/open-sourcing-task-library-for-queueing-reliable-task-execution.html)
+
+
 ## Current features
  * Sending a message from actor A to B in a reliable way (proxy consumers)
  * Segment consumer

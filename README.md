@@ -1,6 +1,7 @@
 # Task project
 
 [![Build Status](https://travis-ci.org/yeghishe/task.svg?branch=master)](https://travis-ci.org/yeghishe/task)
+[![Codacy Badge](https://api.codacy.com/project/badge/df32a59f61e24b8ca83ed02246216e54)](https://www.codacy.com/app/ypiruzyan/task)
 [![Join the chat at https://gitter.im/yeghishe/task](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/yeghishe/task?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Task project is designed to run tasks in reliable manner.
